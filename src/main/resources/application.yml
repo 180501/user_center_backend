@@ -1,0 +1,37 @@
+spring:
+  application:
+    name: user_center
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: admin
+    password: 123456
+    url: jdbc:mysql://192.168.35.139:3306/user_center
+  session:
+#    cookie:
+#      domain: localhost
+    timeout: 86400 #一天时间
+    store-type: redis #session存储类型，默认是cookie，这里修改为redis,表示从 redis 读写 session
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher #设置路径匹配策略，默认是后缀匹配，这里修改为ant路径匹配，支持通配符路径匹配
+  profiles:
+    active: dev
+  #redis配置
+  redis:
+    port: 6379
+    host: localhost
+    database: 0 #这个值是redis的数据库索引，默认是0，数据库索引能够支持多数据库使用。
+server:
+  port: 8080
+  servlet:
+    context-path: /api #设置访问路径,默认是localhost:8080//api
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: false
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:  #可以将已经删除的字段标记为逻辑删除1,没有真删除，但是查询不到
+      logic-delete-field: isDelete  # 全局逻辑删除字段名
+      logic-delete-value: 1 # 逻辑已删除值
+      logic-not-delete-value: 0 # 逻辑未删除值
