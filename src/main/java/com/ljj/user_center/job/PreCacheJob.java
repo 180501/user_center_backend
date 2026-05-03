@@ -44,6 +44,7 @@ public class PreCacheJob {
     //表示在每月的1日的凌晨2点调整任务
     @Scheduled(cron = "0 0 2 * * ?")//每天凌晨2点执行一次
     public void preCache() {
+        //使用redisson的分布式锁，具有看门狗机制
         RLock lock = redissonClient.getLock("yupao:recommend:users:precachejob");//锁的名字肯定是唯一的
         try {
             if(lock.tryLock(0,-1, TimeUnit.SECONDS)){//尝试获取锁，等待时间为0，过期时间-1，启动看门狗的延期机制
