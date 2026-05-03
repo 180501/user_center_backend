@@ -29,7 +29,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@RestController
+@RestController//此注解与@Controller的区别是
 @RequestMapping("/team")
 @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")//(origins="http://129.28.27.222","http://localhost:3000","http://192.168.35.139:3000", allowCredentials = "true") //允许跨域请求
 public class TeamController {
